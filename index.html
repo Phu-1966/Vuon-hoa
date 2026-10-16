@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Vườn Hoa — Những cuốn sách đang nở</title>
+<style>
+:root{--cream:#fff8e9;--ink:#26392b;--gold:#e8d7a0;--glass:rgba(20,31,22,.48)}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;background:#17231a;color:var(--cream);font-family:Georgia,'Times New Roman',serif;overflow:hidden;overscroll-behavior:none}
+.garden{position:relative;width:100%;height:100svh;height:100dvh;min-height:520px;overflow:hidden;background:#243829;isolation:isolate}
+video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;filter:saturate(.92) brightness(.82);transform:scale(1.025);}
+.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(9,19,11,.36),transparent 25%,transparent 56%,rgba(9,19,11,.38));pointer-events:none}
+.intro{position:absolute;z-index:2;top:max(5.5%,env(safe-area-inset-top));left:5%;right:5%;text-align:center;transition:opacity 1.2s ease}
+.kicker{font:600 10px/1.4 system-ui,sans-serif;letter-spacing:.34em;text-transform:uppercase;color:#f6e9c7;text-shadow:0 2px 12px #1a291c}
+h1{font-size:clamp(30px,5vw,62px);font-weight:400;letter-spacing:.08em;margin:10px 0 7px;text-shadow:0 3px 20px #172319}
+.tagline{font-style:italic;font-size:clamp(15px,2vw,21px);color:#fff3d5;text-shadow:0 2px 12px #172319}
+.hint{position:absolute;z-index:2;bottom:5%;left:0;right:0;text-align:center;font:12px/1.5 system-ui,sans-serif;color:#fff8e9;text-shadow:0 2px 10px #101b12;opacity:.86;padding:0 18px}
+.book-encounter{position:absolute;z-index:3;left:50%;top:54%;transform:translate(-50%,-50%);width:min(86vw,480px);text-align:center;opacity:0;pointer-events:none;transition:opacity 1.35s ease,transform 1.35s ease;will-change:left,top,opacity}
+.book-encounter.visible{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
+.book-number{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border:1px solid rgba(255,248,233,.8);border-radius:50%;font:12px system-ui,sans-serif;color:#fff8e9;background:rgba(23,38,25,.25);backdrop-filter:blur(4px);margin-bottom:13px}
+.book-name{display:block;margin:0 auto;padding:9px 18px 12px;border:0;background:linear-gradient(90deg,transparent,var(--glass),transparent);color:#fff9e9;text-shadow:0 2px 12px rgba(0,0,0,.85);font-size:clamp(22px,4vw,34px);line-height:1.22;cursor:pointer;max-width:100%;}
+.book-name::after{content:'chạm để dừng lại';display:block;margin-top:9px;font:10px system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#f4e8c8;opacity:.9}
+.bee{position:absolute;z-index:4;width:76px;height:58px;left:7%;top:48%;filter:drop-shadow(0 3px 5px rgba(15,28,14,.72));animation:drift 16s linear infinite alternate,beeBob 2.6s ease-in-out infinite;pointer-events:none;will-change:transform;z-index:5}
+@keyframes drift{0%{transform:translate(0,0) rotate(-5deg)}20%{transform:translate(13vw,-5vh) rotate(3deg)}40%{transform:translate(27vw,3vh) rotate(-3deg)}60%{transform:translate(41vw,-4vh) rotate(4deg)}80%{transform:translate(55vw,4vh) rotate(-3deg)}100%{transform:translate(68vw,-2vh) rotate(2deg)}}
+.panel-wrap{position:absolute;z-index:10;inset:0;display:flex;align-items:flex-end;justify-content:center;background:rgba(8,18,11,.25);backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:opacity .35s ease}
+.panel-wrap.open{opacity:1;pointer-events:auto}
+.panel{width:min(100%,620px);max-height:84%;overflow:auto;background:rgba(255,250,238,.97);color:var(--ink);border-radius:24px 24px 0 0;padding:26px clamp(22px,5vw,42px) max(24px,env(safe-area-inset-bottom));box-shadow:0 -12px 50px #0b180d55;transform:translateY(30px);transition:transform .35s ease}
+.panel-wrap.open .panel{transform:translateY(0)}.panel-top{display:flex;justify-content:space-between;align-items:center;gap:16px}.small-label{font:600 10px system-ui,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#75816e}.close{border:1px solid #d5d8cb;background:transparent;border-radius:50%;width:36px;height:36px;font-size:22px;color:#435744;cursor:pointer}.panel h2{font-size:clamp(25px,5vw,38px);font-weight:400;line-height:1.15;margin:18px 0 12px}.panel p{font:15px/1.7 system-ui,sans-serif;color:#596656;margin:0 0 22px}.actions{display:flex;flex-wrap:wrap;gap:10px}.action{display:inline-flex;align-items:center;justify-content:center;padding:12px 18px;border-radius:999px;text-decoration:none;font:600 13px system-ui,sans-serif;cursor:pointer;border:1px solid #75866c}.primary{background:#405d45;color:#fff9e9;border-color:#405d45}.secondary{background:transparent;color:#405d45}.note{font:11px/1.5 system-ui,sans-serif;color:#7c8477;margin-top:18px}
+.paused-note{position:absolute;z-index:5;top:16px;right:16px;font:10px system-ui,sans-serif;letter-spacing:.1em;background:rgba(12,25,15,.5);padding:8px 10px;border-radius:99px;opacity:0;transition:opacity .2s}.panel-wrap.open~.paused-note{opacity:1}
+@media(min-width:900px){
+ .garden{max-width:520px;margin:0 auto;height:100svh}
+ .intro{top:6%}.hint{bottom:4%}.book-encounter{top:56%}
+ .panel-wrap{align-items:center}.panel{border-radius:24px;max-height:78%}
+ video{object-position:center center}
+}
+@keyframes beeBob{0%,100%{margin-top:0}50%{margin-top:-5px}} .bee{mix-blend-mode:screen}.bee img{width:100%;height:100%;object-fit:contain;mix-blend-mode:screen}@media(max-width:600px){
+ .intro{top:max(4.5%,env(safe-area-inset-top))}
+ h1{font-size:clamp(30px,9vw,44px);letter-spacing:.06em}
+ .tagline{font-size:16px}
+ .book-encounter{width:min(90vw,420px)}
+ .book-name{font-size:clamp(21px,6vw,29px);padding:9px 12px 12px}
+ .hint{bottom:max(3.5%,env(safe-area-inset-bottom));font-size:11px}
+ .bee{width:64px;height:50px}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style></head>
+<body>
+<main class="garden" id="garden">
+ <video id="gardenVideo" autoplay muted playsinline loop preload="auto" aria-label="Video đi dạo giữa vườn hoa"><source src="vuon-hoa-doc-9x16.mp4" type="video/mp4"></video>
+ <div class="shade"></div>
+ <header class="intro" id="intro"><div class="kicker">Khu Vườn Tâm Thức</div><h1>VƯỜN HOA</h1><div class="tagline">những cuốn sách đang nở</div></header>
+ <div class="bee" aria-hidden="true"><img src="ong-that-ro-net.png" alt="" /></div>
+ <section class="book-encounter" id="encounter" aria-live="polite"><span class="book-number" id="bookNumber">01</span><button class="book-name" id="bookName" type="button">Giữa một cuộc đời</button></section>
+ <div class="hint" id="hint">Cứ thong thả dạo chơi · Một cuốn sách sẽ khẽ hiện ra</div>
+ <div class="panel-wrap" id="panelWrap" aria-hidden="true"><section class="panel" role="dialog" aria-modal="true" aria-labelledby="panelTitle"><div class="panel-top"><span class="small-label" id="panelNumber">Cuốn sách 01</span><button class="close" id="closePanel" aria-label="Đóng trang sách">×</button></div><h2 id="panelTitle">Giữa một cuộc đời</h2><p id="panelDescription">Một cuốn sách đang chờ bạn ghé lại. Khi kết nối đường dẫn EPUB, nút đọc sách sẽ đưa bạn đến đúng trang đọc trên Gò Cao.</p><div class="actions"><a class="action primary" id="readBook" href="#">Đến trang đọc sách</a><button class="action secondary" id="continueJourney" type="button">Tiếp tục dạo chơi</button></div><div class="note">Bản thử nghiệm: tên sách xuất hiện nhẹ nhàng ở những vị trí khác nhau trong khu vườn. Đường dẫn EPUB sẽ được nối ở bước tiếp theo.</div></section></div>
+ <div class="paused-note" id="pausedNote">ĐANG DỪNG CHÂN</div>
+</main>
+<script>
+const books=[
+'Giữa một cuộc đời','Mạn, kẻ vác thước đo đời','Ảo ảnh được đồng thuận','Ảo ảnh trên bệ thờ','Bình minh trong tâm tưởng','Bức tranh độc bản khỏi khuôn mẫu','Chẳng còn đường nữa','Kiêu hãnh và mỉm cười','Bản hoà ca tuyệt vời của sự sống','Trường cảm ứng','Vòng sóng cuộc đời','Ngôi trường tâm thức','Thung lũng cuộc đời','Căn buồng số 4','Bóng mát bồ đề','Khung trời bỏ ngỏ'
+];
+const video=document.getElementById('gardenVideo'), encounter=document.getElementById('encounter'), nameBtn=document.getElementById('bookName'), number=document.getElementById('bookNumber'), panelWrap=document.getElementById('panelWrap'), panelTitle=document.getElementById('panelTitle'), panelNumber=document.getElementById('panelNumber'), readBook=document.getElementById('readBook'), intro=document.getElementById('intro'), hint=document.getElementById('hint');
+// Nhịp dạo vườn chậm và êm hơn bản V5.
+video.playbackRate = 1.0;
+video.addEventListener('loadedmetadata', () => { video.playbackRate = 1.0; });
+let current=0, timer=null, shown=false, startTimer=null;
+const DISPLAY_MS=8500, GAP_MS=3500;
+const encounterSpots=[[50,53],[30,48],[68,57],[48,65],[72,43],[28,60],[54,42],[38,53],[64,64],[50,46],[26,43],[70,51],[43,62],[58,39],[34,66],[62,48]];
+function renderBook(i){current=i;number.textContent=String(i+1).padStart(2,'0');nameBtn.textContent=books[i];const spot=encounterSpots[i%encounterSpots.length];encounter.style.left=spot[0]+'%';encounter.style.top=spot[1]+'%';encounter.classList.add('visible');shown=true;}
+function fadeBook(){encounter.classList.remove('visible');shown=false;}
+function scheduleNext(){clearTimeout(timer);timer=setTimeout(()=>{if(panelWrap.classList.contains('open'))return;fadeBook();timer=setTimeout(()=>{current=(current+1)%books.length;renderBook(current);scheduleNext();},GAP_MS);},DISPLAY_MS);}
+function beginJourney(){clearTimeout(timer);intro.style.opacity='0.86';hint.textContent='Nếu một cuốn sách gọi bạn, hãy chạm để dừng chân';renderBook(current);scheduleNext();}
+function openPanel(){clearTimeout(timer);video.pause();panelTitle.textContent=books[current];panelNumber.textContent='Cuốn sách '+String(current+1).padStart(2,'0');readBook.href='#';panelWrap.classList.add('open');panelWrap.setAttribute('aria-hidden','false');}
+function closePanel(continueVideo=true){panelWrap.classList.remove('open');panelWrap.setAttribute('aria-hidden','true');if(continueVideo){video.play().catch(()=>{});fadeBook();timer=setTimeout(()=>{current=(current+1)%books.length;renderBook(current);scheduleNext();},700);} }
+nameBtn.addEventListener('click',openPanel);document.getElementById('closePanel').addEventListener('click',()=>closePanel());document.getElementById('continueJourney').addEventListener('click',()=>closePanel());
+panelWrap.addEventListener('click',e=>{if(e.target===panelWrap)closePanel();});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&panelWrap.classList.contains('open'))closePanel();if((e.key==='Enter'||e.key===' ')&&document.activeElement===document.body&&shown){e.preventDefault();openPanel();}});
+// Let the opening title breathe before the first encounter.
+setTimeout(beginJourney,4200);
+// Clicking a visible title opens the book panel; tapping elsewhere never interrupts the garden.
+</script>
+</body></html>
