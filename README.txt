@@ -1,11 +1,6 @@
-VUON HOA - BAN NEN V18
+VUON HOA — ban index.html cap nhat
 
-Thu muc nay duoc tao tu goi V18 do nguoi dung cung cap.
-Cac tep goc duoc giu nguyen:
-- index.html
-- vuon-hoa-doc-9x16.mp4
-- ong-that-ro-net.png
-
-sach.json chua 16 ten sach theo dung thu tu da chot.
-Truong url dang de trong vi can dia chi EPUB chinh xac cua tung cuon tren Go Cao.
-Buoc tiep theo: dien URL EPUB vao truong url, sau do tich hop index.html de mo sach.
+- index.html giu giao dien V18, them hai cau thong diep va danh sach 16 cuon.
+- Chon ten sach trong danh sach se mo bang gioi thieu cua cuon do.
+- Nut doc sach hien tro toi doc-sach.html?book=XX; can tao va ket noi trang doc EPUB truoc khi su dung chuc nang doc that.
+- Video va anh ong la tai nguyen goc tu V18.
