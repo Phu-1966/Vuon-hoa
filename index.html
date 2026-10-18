@@ -135,7 +135,7 @@ function closePanel(continueVideo = true){
       scheduleNext();
 
     }, 700);
-
+}
   }
 nameBtn.addEventListener('click',openPanel);document.getElementById('closePanel').addEventListener('click',()=>closePanel());document.getElementById('continueJourney').addEventListener('click',()=>closePanel());
 panelWrap.addEventListener('click',e=>{if(e.target===panelWrap)closePanel();});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&panelWrap.classList.contains('open'))closePanel();if((e.key==='Enter'||e.key===' ')&&document.activeElement===document.body&&shown){e.preventDefault();openPanel();}});
