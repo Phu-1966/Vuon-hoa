@@ -78,7 +78,21 @@ function renderBook(i){current=i;number.textContent=String(i+1).padStart(2,'0');
 function fadeBook(){encounter.classList.remove('visible');shown=false;}
 function scheduleNext(){clearTimeout(timer);timer=setTimeout(()=>{if(panelWrap.classList.contains('open'))return;fadeBook();timer=setTimeout(()=>{current=(current+1)%books.length;renderBook(current);scheduleNext();},GAP_MS);},DISPLAY_MS);}
 function beginJourney(){clearTimeout(timer);intro.style.opacity='0.86';hint.textContent='Nếu một cuốn sách gọi bạn, hãy chạm để dừng chân';renderBook(current);scheduleNext();}
-function openPanel(){clearTimeout(timer);video.pause();panelTitle.textContent=books[current];panelNumber.textContent='Cuốn sách '+String(current+1).padStart(2,'0');readBook.href='doc-sach-giua-mot-cuoc-doi.html';panelWrap.classList.add('open');panelWrap.setAttribute('aria-hidden','false');}
+function openPanel(){clearTimeout(timer);video.pause();panelTitle.textContent=books[current];panelNumber.textContent='Cuốn sách '+String(current+1).padStart(2,'0');const bookNumber = String(current + 1).padStart(2, '0');
+
+if (current === 0) {
+
+  readBook.href = 'doc-sach-giua-mot-cuoc-doi.html';
+
+} else if (current === 1) {
+
+  readBook.href = 'doc-sach-man.html';
+
+} else {
+
+  readBook.href = 'doc-sach.html?book=' + bookNumber;
+
+}
 function closePanel(continueVideo=true){panelWrap.classList.remove('open');panelWrap.setAttribute('aria-hidden','true');if(continueVideo){video.play().catch(()=>{});fadeBook();timer=setTimeout(()=>{current=(current+1)%books.length;renderBook(current);scheduleNext();},700);} }
 nameBtn.addEventListener('click',openPanel);document.getElementById('closePanel').addEventListener('click',()=>closePanel());document.getElementById('continueJourney').addEventListener('click',()=>closePanel());
 panelWrap.addEventListener('click',e=>{if(e.target===panelWrap)closePanel();});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&panelWrap.classList.contains('open'))closePanel();if((e.key==='Enter'||e.key===' ')&&document.activeElement===document.body&&shown){e.preventDefault();openPanel();}});
