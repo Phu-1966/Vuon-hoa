@@ -114,7 +114,7 @@ h1{font-size:clamp(30px,5vw,62px);font-weight:400;letter-spacing:.08em;margin:10
   <p class="list-foot">Vườn Hoa · Ta nhận ra mình không đứng riêng.</p>
  </section>
 </main>
- // Âm thanh buổi sáng trong Vườn Hoa
+// Âm thanh buổi sáng trong Vườn Hoa
 
 const vhAudio = document.getElementById('vhAmbientAudio');
 
@@ -132,13 +132,19 @@ vhAudioButton.addEventListener('click', async () => {
 
       vhAudioButton.textContent = '🔊 Âm thanh';
 
+      vhAudioButton.style.background = '#dce9d8';
+
+      vhAudioButton.style.color = '#315b38';
+
       vhAudioButton.setAttribute('aria-pressed', 'true');
 
       vhAudioButton.setAttribute('aria-label', 'Tắt âm thanh Vườn Hoa');
 
     } catch (error) {
 
-      console.log('Không thể phát âm thanh:', error);
+      console.error('Lỗi phát âm thanh:', error);
+
+      alert('Chưa phát được âm thanh. Bạn thử lại nhé!');
 
     }
 
@@ -147,6 +153,10 @@ vhAudioButton.addEventListener('click', async () => {
     vhAudio.pause();
 
     vhAudioButton.textContent = '🔇 Âm thanh';
+
+    vhAudioButton.style.background = 'rgba(248,240,226,.94)';
+
+    vhAudioButton.style.color = '#61472f';
 
     vhAudioButton.setAttribute('aria-pressed', 'false');
 
