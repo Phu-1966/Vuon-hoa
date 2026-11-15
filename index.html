@@ -71,6 +71,33 @@ h1{font-size:clamp(30px,5vw,62px);font-weight:400;letter-spacing:.08em;margin:10
   🏡 Về trang chủ
 
 </a>
+ <button id="vhAudioButton" type="button"
+
+  aria-label="Bật âm thanh Vườn Hoa"
+
+  aria-pressed="false"
+
+  style="position:fixed;top:0px;right:12px;z-index:9999;
+
+  padding:10px 14px;border-radius:24px;
+
+  background:rgba(248,240,226,.94);color:#61472f;
+
+  border:1px solid rgba(97,71,47,.25);
+
+  font:600 13px/1.2 system-ui,sans-serif;
+
+  box-shadow:0 2px 10px rgba(40,25,12,.16);cursor:pointer;">
+
+  🔇 Âm thanh
+
+</button>
+
+<audio id="vhAmbientAudio"
+
+  src="morning-garden-with-bee-flybys.mp3"
+
+  loop preload="none"></audio>
 
 <main class="garden" id="garden">
  <video id="gardenVideo" autoplay muted playsinline loop preload="auto" aria-label="Video đi dạo giữa vườn hoa"><source src="vuon-hoa-doc-9x16.mp4" type="video/mp4"></video>
@@ -87,6 +114,47 @@ h1{font-size:clamp(30px,5vw,62px);font-weight:400;letter-spacing:.08em;margin:10
   <p class="list-foot">Vườn Hoa · Ta nhận ra mình không đứng riêng.</p>
  </section>
 </main>
+ // Âm thanh buổi sáng trong Vườn Hoa
+
+const vhAudio = document.getElementById('vhAmbientAudio');
+
+const vhAudioButton = document.getElementById('vhAudioButton');
+
+vhAudio.volume = 0.22;
+
+vhAudioButton.addEventListener('click', async () => {
+
+  if (vhAudio.paused) {
+
+    try {
+
+      await vhAudio.play();
+
+      vhAudioButton.textContent = '🔊 Âm thanh';
+
+      vhAudioButton.setAttribute('aria-pressed', 'true');
+
+      vhAudioButton.setAttribute('aria-label', 'Tắt âm thanh Vườn Hoa');
+
+    } catch (error) {
+
+      console.log('Không thể phát âm thanh:', error);
+
+    }
+
+  } else {
+
+    vhAudio.pause();
+
+    vhAudioButton.textContent = '🔇 Âm thanh';
+
+    vhAudioButton.setAttribute('aria-pressed', 'false');
+
+    vhAudioButton.setAttribute('aria-label', 'Bật âm thanh Vườn Hoa');
+
+  }
+
+});
 <script>
 const books=[
 'Giữa một cuộc đời','Mạn, kẻ vác thước đo đời','Ảo ảnh được đồng thuận','Ảo ảnh trên bệ thờ','Bình minh trong tâm tưởng','Bức tranh độc bản khỏi khuôn mẫu','Không nơi để đến','Kiêu hãnh và mỉm cười','Bản hoà ca tuyệt vời của sự sống','Trường cảm ứng','Vòng sóng cuộc đời','Ngôi trường tâm thức','Thung lũng cuộc đời','Căn buồng số 4','Bóng mát bồ đề','Khung trời bỏ ngỏ'
